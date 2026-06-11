@@ -295,7 +295,15 @@ export const db = {
     },
     update: (id: string, data: Partial<Payment>) => {
       const idx = payments.findIndex((p) => p.id === id)
-      if (idx !== -1) { payments[idx] = { ...payments[idx], ...data }; return payments[idx] }
+      if (idx !== -1) {
+        const item = payments[idx]
+        if (data.status !== undefined) item.status = data.status
+        if (data.amount !== undefined) item.amount = data.amount
+        if (data.dueDate !== undefined) item.dueDate = data.dueDate
+        if (data.paidDate !== undefined) item.paidDate = data.paidDate
+        if (data.month !== undefined) item.month = data.month
+        return item
+      }
       return null
     },
   },
@@ -311,7 +319,16 @@ export const db = {
     },
     update: (id: string, data: Partial<Complaint>) => {
       const idx = complaints.findIndex((c) => c.id === id)
-      if (idx !== -1) { complaints[idx] = { ...complaints[idx], ...data }; return complaints[idx] }
+      if (idx !== -1) {
+        const item = complaints[idx]
+        if (data.status !== undefined) item.status = data.status
+        if (data.priority !== undefined) item.priority = data.priority
+        if (data.title !== undefined) item.title = data.title
+        if (data.description !== undefined) item.description = data.description
+        if (data.category !== undefined) item.category = data.category
+        if (data.updatedAt !== undefined) item.updatedAt = data.updatedAt
+        return item
+      }
       return null
     },
   },
@@ -327,7 +344,18 @@ export const db = {
     },
     update: (id: string, data: Partial<Visitor>) => {
       const idx = visitors.findIndex((v) => v.id === id)
-      if (idx !== -1) { visitors[idx] = { ...visitors[idx], ...data }; return visitors[idx] }
+      if (idx !== -1) {
+        const item = visitors[idx]
+        if (data.status !== undefined) item.status = data.status
+        if (data.checkedInAt !== undefined) item.checkedInAt = data.checkedInAt
+        if (data.checkedOutAt !== undefined) item.checkedOutAt = data.checkedOutAt
+        if (data.expectedAt !== undefined) item.expectedAt = data.expectedAt
+        if (data.name !== undefined) item.name = data.name
+        if (data.phone !== undefined) item.phone = data.phone
+        if (data.purpose !== undefined) item.purpose = data.purpose
+        if (data.unit !== undefined) item.unit = data.unit
+        return item
+      }
       return null
     },
   },

@@ -30,16 +30,32 @@ export default function MeetingsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const controller1 = new AbortController()
+    const timeoutId1 = setTimeout(() => controller1.abort(), 8000)
+    
     // Get role
-    fetch("/api/auth/me")
+    fetch("/api/auth/me", { signal: controller1.signal })
       .then((res) => res.json())
       .then((data) => { if (data.user) setRole(data.user.role) })
+      .catch(() => {})
+      .finally(() => clearTimeout(timeoutId1))
 
+    const controller2 = new AbortController()
+    const timeoutId2 = setTimeout(() => controller2.abort(), 8000)
+    
     // Get meetings
-    fetch("/api/meetings")
+    fetch("/api/meetings", { signal: controller2.signal })
       .then((res) => res.json())
       .then((data) => { setMeetings(data.meetings || []); setLoading(false) })
       .catch(() => setLoading(false))
+      .finally(() => clearTimeout(timeoutId2))
+      
+    return () => {
+      controller1.abort()
+      clearTimeout(timeoutId1)
+      controller2.abort()
+      clearTimeout(timeoutId2)
+    }
   }, [])
 
   const isAdmin = role === "admin"

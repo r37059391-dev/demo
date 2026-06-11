@@ -26,10 +26,19 @@ export default function TenantDashboard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch("/api/dashboard")
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 8000)
+    
+    fetch("/api/dashboard", { signal: controller.signal })
       .then((res) => res.json())
       .then((d) => { setData(d); setLoading(false) })
       .catch(() => setLoading(false))
+      .finally(() => clearTimeout(timeoutId))
+      
+    return () => {
+      controller.abort()
+      clearTimeout(timeoutId)
+    }
   }, [])
 
   if (loading) {

@@ -88,7 +88,10 @@ export default function DashboardLayout({
   const router = useRouter()
 
   useEffect(() => {
-    fetch("/api/auth/me")
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 8000)
+    
+    fetch("/api/auth/me", { signal: controller.signal })
       .then((res) => res.json())
       .then((data) => {
         if (data.user) {
@@ -102,6 +105,12 @@ export default function DashboardLayout({
       .catch(() => {
         router.push("/login")
       })
+      .finally(() => clearTimeout(timeoutId))
+      
+    return () => {
+      controller.abort()
+      clearTimeout(timeoutId)
+    }
   }, [])
 
   const toggleExpand = (name: string) => {
@@ -254,7 +263,12 @@ export default function DashboardLayout({
           </Link>
           <button 
             onClick={async () => {
-              await fetch('/api/auth/logout', { method: 'POST' })
+              try {
+                const controller = new AbortController()
+                const timeoutId = setTimeout(() => controller.abort(), 5000)
+                await fetch('/api/auth/logout', { method: 'POST', signal: controller.signal })
+                clearTimeout(timeoutId)
+              } catch (e) {}
               if (typeof window !== 'undefined') {
                 localStorage.removeItem('userRole')
                 localStorage.removeItem('userName')
