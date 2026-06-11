@@ -27,7 +27,7 @@ export default function ComplaintsPage() {
         </div>
         
         <Dialog>
-          <DialogTrigger render={<Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium" />}>
+          <DialogTrigger render={<Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium" />}>
             <MessageSquarePlus className="w-4 h-4 mr-2" /> Raise Complaint
           </DialogTrigger>
           <DialogContent className="sm:max-w-[480px]">
@@ -76,7 +76,7 @@ export default function ComplaintsPage() {
               </div>
             </div>
             <DialogFooter>
-              <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium">Submit Request</Button>
+              <Button type="submit" className="w-full bg-gradient-to-r from-primary to-[#D4894A] text-white rounded-xl font-medium">Submit Request</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -86,7 +86,7 @@ export default function ComplaintsPage() {
       <div className="grid grid-cols-3 gap-4">
         <Card className="shadow-sm border-gray-100 bg-white">
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-blue-600">3</p>
+            <p className="text-2xl font-bold text-primary">3</p>
             <p className="text-xs text-gray-500 font-medium mt-1">Total Raised</p>
           </CardContent>
         </Card>
@@ -112,18 +112,18 @@ export default function ComplaintsPage() {
               <div className="flex">
                 <div className={`w-1.5 shrink-0 ${
                   complaint.status === 'Resolved' ? 'bg-emerald-500' : 
-                  complaint.priority === 'High' ? 'bg-red-500' : 'bg-blue-500'
+                  complaint.priority === 'High' ? 'bg-red-500' : 'bg-primary/100'
                 }`} />
                 <div className="p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 flex-1">
                   <div className="flex gap-4 items-start w-full">
                     <div className={`p-3 rounded-xl flex-shrink-0 transition-colors ${
-                      complaint.status === 'Resolved' ? 'bg-emerald-50 text-emerald-600' : 'bg-blue-50 text-blue-600'
+                      complaint.status === 'Resolved' ? 'bg-emerald-50 text-emerald-600' : 'bg-primary/10 text-primary'
                     }`}>
                       <complaint.icon className="w-5 h-5" />
                     </div>
                     <div className="space-y-1.5 flex-1">
                       <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                        <h3 className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">{complaint.title}</h3>
+                        <h3 className="font-semibold text-gray-900 group-hover:text-[#D4894A] transition-colors">{complaint.title}</h3>
                         <Badge variant="outline" className="w-fit text-[10px] text-gray-500 bg-gray-50 border-gray-200 rounded-md font-medium">
                           {complaint.id}
                         </Badge>
@@ -147,7 +147,7 @@ export default function ComplaintsPage() {
                       className={`text-xs font-medium border rounded-lg ${
                         complaint.status === "Resolved" 
                           ? "bg-emerald-50 text-emerald-700 border-emerald-200" 
-                          : "bg-blue-50 text-blue-700 border-blue-200"
+                          : "bg-primary/10 text-[#D4894A] border-primary/30"
                       }`}>
                       {complaint.status === "Resolved" && <CheckCircle2 className="w-3 h-3 mr-1" />}
                       {complaint.status === "In Progress" && <AlertCircle className="w-3 h-3 mr-1" />}

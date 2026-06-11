@@ -46,7 +46,7 @@ export default function VisitorsPage() {
           <p className="text-sm text-gray-500">Track, pre-approve, and manage visitor entries.</p>
         </div>
         <Dialog>
-          <DialogTrigger render={<Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium" />}>
+          <DialogTrigger render={<Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium" />}>
             <Plus className="w-4 h-4 mr-2" /> Pre-Approve Visitor
           </DialogTrigger>
           <DialogContent>
@@ -86,7 +86,7 @@ export default function VisitorsPage() {
               </div>
             </div>
             <DialogFooter>
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium">
+              <Button className="w-full bg-gradient-to-r from-primary to-[#D4894A] text-white rounded-xl font-medium">
                 <Shield className="w-4 h-4 mr-2" /> Pre-Approve
               </Button>
             </DialogFooter>
@@ -97,7 +97,7 @@ export default function VisitorsPage() {
       {/* Stats */}
       <div className="grid gap-4 md:grid-cols-4">
         {[
-          { title: "Today's Visitors", value: stats.today, icon: Users, bg: "bg-blue-50", color: "text-blue-600", border: "border-blue-100" },
+          { title: "Today's Visitors", value: stats.today, icon: Users, bg: "bg-primary/10", color: "text-primary", border: "border-primary/20" },
           { title: "Checked In", value: stats.checkedIn, icon: LogIn, bg: "bg-emerald-50", color: "text-emerald-600", border: "border-emerald-100" },
           { title: "Pre-Approved", value: stats.preApproved, icon: Shield, bg: "bg-violet-50", color: "text-violet-600", border: "border-violet-100" },
           { title: "Checked Out", value: stats.checkedOut, icon: LogOut, bg: "bg-gray-50", color: "text-gray-500", border: "border-gray-200" },

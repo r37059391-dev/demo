@@ -32,7 +32,7 @@ export default function SettingsPage() {
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">Settings</h1>
           <p className="text-sm text-gray-500">Manage your account settings and preferences.</p>
         </div>
-        <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium">
+        <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium">
           <Save className="w-4 h-4 mr-2" /> Save Changes
         </Button>
       </div>
@@ -47,11 +47,11 @@ export default function SettingsPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
                   activeTab === tab.id
-                    ? "bg-blue-50 text-blue-700"
+                    ? "bg-primary/10 text-[#D4894A]"
                     : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                 }`}
               >
-                <tab.icon className={`h-4 w-4 ${activeTab === tab.id ? "text-blue-600" : "text-gray-400"}`} />
+                <tab.icon className={`h-4 w-4 ${activeTab === tab.id ? "text-primary" : "text-gray-400"}`} />
                 {tab.label}
               </button>
             ))}
@@ -72,7 +72,7 @@ export default function SettingsPage() {
                     <button
                       onClick={() => setTheme("light")}
                       className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${
-                        theme === "light" ? "border-blue-600 bg-blue-50/50 text-blue-700" : "border-gray-100 hover:border-gray-200 text-gray-600"
+                        theme === "light" ? "border-primary bg-primary/5 text-[#D4894A]" : "border-gray-100 hover:border-gray-200 text-gray-600"
                       }`}
                     >
                       <Sun className="h-6 w-6 mb-2" />
@@ -81,7 +81,7 @@ export default function SettingsPage() {
                     <button
                       onClick={() => setTheme("dark")}
                       className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${
-                        theme === "dark" ? "border-blue-600 bg-blue-50/50 text-blue-700" : "border-gray-100 hover:border-gray-200 text-gray-600"
+                        theme === "dark" ? "border-primary bg-primary/5 text-[#D4894A]" : "border-gray-100 hover:border-gray-200 text-gray-600"
                       }`}
                     >
                       <Moon className="h-6 w-6 mb-2" />
@@ -90,7 +90,7 @@ export default function SettingsPage() {
                     <button
                       onClick={() => setTheme("system")}
                       className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all ${
-                        theme === "system" ? "border-blue-600 bg-blue-50/50 text-blue-700" : "border-gray-100 hover:border-gray-200 text-gray-600"
+                        theme === "system" ? "border-primary bg-primary/5 text-[#D4894A]" : "border-gray-100 hover:border-gray-200 text-gray-600"
                       }`}
                     >
                       <Monitor className="h-6 w-6 mb-2" />
@@ -237,15 +237,15 @@ export default function SettingsPage() {
                 <CardDescription>Manage your payment methods and plans.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="p-4 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-between">
+                <div className="p-4 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <Building className="h-4 w-4 text-blue-600" />
+                      <Building className="h-4 w-4 text-primary" />
                       <span className="text-sm font-semibold text-gray-900">Premium Resident Plan</span>
                     </div>
                     <p className="text-xs text-gray-500">Includes all standard amenities + priority support</p>
                   </div>
-                  <Badge className="bg-blue-600">Active</Badge>
+                  <Badge className="bg-primary">Active</Badge>
                 </div>
 
                 <div className="space-y-4">

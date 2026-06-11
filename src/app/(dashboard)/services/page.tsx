@@ -12,7 +12,7 @@ import {
 } from "lucide-react"
 
 const amenities = [
-  { name: "Swimming Pool", icon: Waves, status: "Open", hours: "6 AM - 9 AM, 4 PM - 8 PM", nextAvail: "Now", color: "text-blue-600", bg: "bg-blue-50", capacity: "30 people", rating: "4.8" },
+  { name: "Swimming Pool", icon: Waves, status: "Open", hours: "6 AM - 9 AM, 4 PM - 8 PM", nextAvail: "Now", color: "text-primary", bg: "bg-primary/10", capacity: "30 people", rating: "4.8" },
   { name: "Gym & Fitness", icon: Dumbbell, status: "Open", hours: "5:30 AM - 10 PM", nextAvail: "Now", color: "text-emerald-600", bg: "bg-emerald-50", capacity: "20 people", rating: "4.7" },
   { name: "Club House", icon: Coffee, status: "Available", hours: "8 AM - 10 PM", nextAvail: "Book now", color: "text-violet-600", bg: "bg-violet-50", capacity: "100 people", rating: "4.9" },
   { name: "Children's Play Area", icon: Baby, status: "Open", hours: "7 AM - 8 PM", nextAvail: "Now", color: "text-amber-600", bg: "bg-amber-50", capacity: "25 children", rating: "4.6" },
@@ -39,7 +39,7 @@ export default function ServicesPage() {
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">Services & Facilities</h1>
           <p className="text-sm text-gray-500">Book amenities, request maintenance, and manage services.</p>
         </div>
-        <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium">
+        <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium">
           <Wrench className="w-4 h-4 mr-2" /> Request Service
         </Button>
       </div>
@@ -89,7 +89,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="mt-4">
                     {a.status !== "Maintenance" ? (
-                      <Button variant="outline" size="sm" className="w-full rounded-lg border-gray-200 text-xs font-medium hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200">
+                      <Button variant="outline" size="sm" className="w-full rounded-lg border-gray-200 text-xs font-medium hover:bg-primary/10 hover:text-[#D4894A] hover:border-primary/30">
                         <Calendar className="h-3 w-3 mr-1.5" /> Book Now
                       </Button>
                     ) : (
@@ -111,13 +111,13 @@ export default function ServicesPage() {
                 <div className="flex">
                   <div className={`w-1.5 shrink-0 ${
                     sr.status === "Completed" ? "bg-emerald-500" :
-                    sr.status === "In Progress" ? "bg-blue-500" : "bg-amber-500"
+                    sr.status === "In Progress" ? "bg-primary/100" : "bg-amber-500"
                   }`} />
                   <div className="flex-1 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div className="flex items-center gap-4">
                       <div className={`p-3 rounded-xl shrink-0 ${
                         sr.status === "Completed" ? "bg-emerald-50 text-emerald-600" :
-                        sr.status === "In Progress" ? "bg-blue-50 text-blue-600" : "bg-amber-50 text-amber-600"
+                        sr.status === "In Progress" ? "bg-primary/10 text-primary" : "bg-amber-50 text-amber-600"
                       }`}>
                         <Wrench className="h-5 w-5" />
                       </div>
@@ -136,7 +136,7 @@ export default function ServicesPage() {
                     </div>
                     <Badge variant="outline" className={`text-xs font-medium rounded-lg border ${
                       sr.status === "Completed" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
-                      sr.status === "In Progress" ? "bg-blue-50 text-blue-700 border-blue-200" :
+                      sr.status === "In Progress" ? "bg-primary/10 text-[#D4894A] border-primary/30" :
                       "bg-amber-50 text-amber-700 border-amber-200"
                     }`}>
                       {sr.status === "Completed" && <CheckCircle2 className="w-3 h-3 mr-1" />}

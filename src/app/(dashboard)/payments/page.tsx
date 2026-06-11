@@ -123,21 +123,21 @@ export default function PaymentsPage() {
                   <Label className="text-sm font-semibold text-gray-700">Description</Label>
                   <Textarea placeholder="Optional notes for the invoice..." className="rounded-xl min-h-[80px]" />
                 </div>
-                <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl border border-blue-100">
+                <div className="flex items-center gap-3 p-3 bg-primary/10 rounded-xl border border-primary/20">
                   <Checkbox id="send-notify" defaultChecked />
-                  <label htmlFor="send-notify" className="text-sm text-blue-800 font-medium cursor-pointer">
+                  <label htmlFor="send-notify" className="text-sm text-[#C4581E] font-medium cursor-pointer">
                     Send notification to tenant(s) upon generation
                   </label>
                 </div>
               </div>
               <DialogFooter>
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium">
+                <Button className="w-full bg-gradient-to-r from-primary to-[#D4894A] text-white rounded-xl font-medium">
                   <FileText className="w-4 h-4 mr-2" /> Generate & Send Invoice
                 </Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
-          <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium">
+          <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium">
             <IndianRupee className="w-4 h-4 mr-1" /> Make Payment
           </Button>
         </div>
@@ -148,7 +148,7 @@ export default function PaymentsPage() {
         {[
           { title: "Total Collected", value: "₹4,85,200", change: "+12.5%", up: true, icon: IndianRupee, iconBg: "bg-emerald-50", iconColor: "text-emerald-600", border: "border-emerald-100" },
           { title: "Pending Amount", value: "₹24,500", change: "7 invoices", up: false, icon: Receipt, iconBg: "bg-red-50", iconColor: "text-red-500", border: "border-red-100" },
-          { title: "Collection Rate", value: "94.2%", change: "+2.1%", up: true, icon: TrendingUp, iconBg: "bg-blue-50", iconColor: "text-blue-600", border: "border-blue-100" },
+          { title: "Collection Rate", value: "94.2%", change: "+2.1%", up: true, icon: TrendingUp, iconBg: "bg-primary/10", iconColor: "text-primary", border: "border-primary/20" },
           { title: "Overdue", value: "₹4,000", change: "2 tenants", up: false, icon: AlertCircle, iconBg: "bg-amber-50", iconColor: "text-amber-500", border: "border-amber-100" },
         ].map((stat) => (
           <Card key={stat.title} className={`card-hover shadow-sm border ${stat.border} bg-white`}>
@@ -244,7 +244,11 @@ export default function PaymentsPage() {
                 <TableBody>
                   {filteredPayments.map((payment) => (
                     <TableRow key={payment.id} className="hover:bg-gray-50/50 transition-colors">
-                      <TableCell className="font-semibold text-gray-900 text-sm">{payment.id}</TableCell>
+                      <TableCell>
+                        <span className="inline-block px-2.5 py-1 rounded-lg border border-gray-200 bg-gray-50 font-semibold text-gray-900 text-xs">
+                          {payment.id}
+                        </span>
+                      </TableCell>
                       <TableCell>
                         <div className="flex flex-col">
                           <span className="font-semibold text-gray-900 text-sm">{payment.tenant}</span>
@@ -252,7 +256,7 @@ export default function PaymentsPage() {
                         </div>
                       </TableCell>
                       <TableCell>
-                        <span className={`text-sm font-medium ${payment.type === "Late Fee" ? "text-red-600" : payment.type === "Security Deposit" ? "text-blue-600" : "text-gray-600"}`}>
+                        <span className={`text-sm font-medium ${payment.type === "Late Fee" ? "text-red-600" : payment.type === "Security Deposit" ? "text-primary" : "text-gray-600"}`}>
                           {payment.type}
                         </span>
                       </TableCell>
@@ -280,7 +284,7 @@ export default function PaymentsPage() {
                       <TableCell className="text-right">
                         <div className="flex items-center justify-end gap-1">
                           {payment.status !== "Paid" && (
-                            <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg text-xs font-medium">
+                            <Button variant="ghost" size="sm" className="text-primary hover:text-[#D4894A] hover:bg-primary/10 rounded-lg text-xs font-medium">
                               <Send className="h-3.5 w-3.5 mr-1" /> Remind
                             </Button>
                           )}
@@ -299,7 +303,7 @@ export default function PaymentsPage() {
                 <span>Showing {filteredPayments.length} of {payments.length} transactions</span>
                 <div className="flex gap-1">
                   <Button variant="outline" size="sm" className="rounded-lg border-gray-200 text-xs h-8 px-3" disabled>Previous</Button>
-                  <Button variant="outline" size="sm" className="rounded-lg border-gray-200 text-xs h-8 px-3 bg-blue-50 text-blue-700 border-blue-200">1</Button>
+                  <Button variant="outline" size="sm" className="rounded-lg border-gray-200 text-xs h-8 px-3 bg-primary/10 text-[#D4894A] border-primary/30">1</Button>
                   <Button variant="outline" size="sm" className="rounded-lg border-gray-200 text-xs h-8 px-3">Next</Button>
                 </div>
               </div>
@@ -376,7 +380,7 @@ export default function PaymentsPage() {
               </CardHeader>
               <CardContent className="pt-4 space-y-4">
                 {[
-                  { method: "UPI", amount: "₹2,45,000", percent: 52, color: "bg-blue-500", bg: "bg-blue-50", icon: QrCode },
+                  { method: "UPI", amount: "₹2,45,000", percent: 52, color: "bg-primary/100", bg: "bg-primary/10", icon: QrCode },
                   { method: "Credit Card", amount: "₹1,20,000", percent: 25, color: "bg-violet-500", bg: "bg-violet-50", icon: CreditCard },
                   { method: "Net Banking", amount: "₹85,200", percent: 18, color: "bg-emerald-500", bg: "bg-emerald-50", icon: Globe },
                   { method: "Cash/Cheque", amount: "₹35,000", percent: 5, color: "bg-amber-500", bg: "bg-amber-50", icon: Banknote },
@@ -457,8 +461,8 @@ export default function PaymentsPage() {
             <Card className="shadow-sm border-gray-100 bg-white">
               <CardHeader className="pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-blue-50">
-                    <Calculator className="h-5 w-5 text-blue-600" />
+                  <div className="p-2 rounded-xl bg-primary/10">
+                    <Calculator className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <CardTitle className="text-base font-semibold">Billing Configuration</CardTitle>
@@ -551,7 +555,7 @@ export default function PaymentsPage() {
                   </div>
                   <button
                     onClick={() => setLateFeeEnabled(!lateFeeEnabled)}
-                    className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${lateFeeEnabled ? 'bg-blue-600' : 'bg-gray-300'}`}
+                    className={`relative w-11 h-6 rounded-full transition-colors duration-200 ${lateFeeEnabled ? 'bg-primary' : 'bg-gray-300'}`}
                   >
                     <div className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform duration-200 ${lateFeeEnabled ? 'translate-x-5.5' : 'translate-x-0.5'}`} />
                   </button>
@@ -721,7 +725,7 @@ export default function PaymentsPage() {
             <Button variant="outline" className="rounded-xl border-gray-200 font-medium px-6">
               Reset to Defaults
             </Button>
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium px-8">
+            <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium px-8">
               <CheckCircle2 className="w-4 h-4 mr-2" /> Save Configuration
             </Button>
           </div>
@@ -738,8 +742,8 @@ export default function PaymentsPage() {
                 status: "Active",
                 statusColor: "bg-emerald-50 text-emerald-700 border-emerald-200",
                 provider: "Razorpay",
-                bg: "bg-blue-50",
-                iconColor: "text-blue-600",
+                bg: "bg-primary/10",
+                iconColor: "text-primary",
                 desc: "Accept UPI payments via QR code or VPA"
               },
               {
@@ -779,7 +783,7 @@ export default function PaymentsPage() {
                   <Separator className="my-3" />
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-gray-500 font-medium">Provider: {gw.provider}</span>
-                    <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-lg text-xs font-medium h-7 px-2">
+                    <Button variant="ghost" size="sm" className="text-primary hover:text-[#D4894A] hover:bg-primary/10 rounded-lg text-xs font-medium h-7 px-2">
                       Configure
                     </Button>
                   </div>
@@ -906,8 +910,8 @@ export default function PaymentsPage() {
           <Card className="shadow-sm border-gray-100 bg-white">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-blue-50">
-                  <Smartphone className="h-5 w-5 text-blue-600" />
+                <div className="p-2 rounded-xl bg-primary/10">
+                  <Smartphone className="h-5 w-5 text-primary" />
                 </div>
                 <div>
                   <CardTitle className="text-base font-semibold">UPI & QR Code Settings</CardTitle>
@@ -926,9 +930,9 @@ export default function PaymentsPage() {
                     <Label className="text-sm font-semibold text-gray-700">Display Name on UPI</Label>
                     <Input defaultValue="SmartApt Society Maintenance" className="h-11 rounded-xl border-gray-200 bg-gray-50/50 focus:bg-white" />
                   </div>
-                  <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl border border-blue-100">
+                  <div className="flex items-center gap-3 p-3 bg-primary/10 rounded-xl border border-primary/20">
                     <Checkbox defaultChecked />
-                    <label className="text-xs text-blue-800 font-medium cursor-pointer">
+                    <label className="text-xs text-[#C4581E] font-medium cursor-pointer">
                       Generate unique QR code for each invoice
                     </label>
                   </div>
@@ -950,7 +954,7 @@ export default function PaymentsPage() {
             <Button variant="outline" className="rounded-xl border-gray-200 font-medium px-6">
               Discard Changes
             </Button>
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium px-8">
+            <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium px-8">
               <Shield className="w-4 h-4 mr-2" /> Save Gateway Settings
             </Button>
           </div>

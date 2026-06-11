@@ -35,7 +35,7 @@ export default function TenantDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
       </div>
     )
   }
@@ -70,8 +70,8 @@ export default function TenantDashboard() {
       title: "Visitors Today",
       value: String(data.stats.visitorsToday),
       sub: "Expected arrivals",
-      subColor: "text-blue-600",
-      icon: Users, iconBg: "bg-blue-50", iconColor: "text-blue-500", border: "border-blue-100",
+      subColor: "text-primary",
+      icon: Users, iconBg: "bg-primary/10", iconColor: "text-primary", border: "border-primary/20",
     },
   ]
 
@@ -79,29 +79,29 @@ export default function TenantDashboard() {
     switch (tag) {
       case "Alert": return "bg-red-50 text-red-600 border-red-100"
       case "Event": return "bg-emerald-50 text-emerald-600 border-emerald-100"
-      default: return "bg-blue-50 text-blue-600 border-blue-100"
+      default: return "bg-primary/10 text-primary border-primary/20"
     }
   }
 
   return (
     <div className="space-y-8">
       {/* Welcome Header */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 p-8 text-white shadow-xl shadow-blue-700/15 animate-gradient">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary via-[#D4894A] to-[#C4581E] p-8 text-white shadow-xl shadow-primary/20 animate-gradient">
         <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-sm" />
         <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/10 rounded-full blur-sm" />
         <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <p className="text-blue-100 text-sm font-medium mb-1">Good Evening</p>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Welcome back, {data.user.name?.split(" ")[0]}! 👋</h1>
-            <p className="text-blue-200 mt-2 text-sm">
+            <p className="text-white/80 text-sm font-medium mb-1">Good Evening</p>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Welcome back, {data.user.name?.split(" ")[0]}!</h1>
+            <p className="text-white/80 mt-2 text-sm">
               Block {data.user.block}, Flat {data.user.unit} • Lease active until {data.user.leaseEnd ? new Date(data.user.leaseEnd).toLocaleDateString("en-US", { month: "short", year: "numeric" }) : "N/A"}
             </p>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline" className="border-white/25 text-white hover:bg-white/10 rounded-xl font-medium backdrop-blur-sm">
+            <Button className="bg-white/20 border border-white/30 text-white hover:bg-white/30 hover:text-white rounded-xl font-medium backdrop-blur-md shadow-sm">
               Raise Complaint
             </Button>
-            <Button className="bg-white text-blue-700 hover:bg-blue-50 rounded-xl font-medium shadow-lg">
+            <Button className="bg-white text-primary hover:bg-white/90 rounded-xl font-medium shadow-lg">
               <IndianRupee className="w-4 h-4 mr-1" /> Pay Now
             </Button>
           </div>
@@ -137,7 +137,7 @@ export default function TenantDashboard() {
                 <CardTitle className="text-lg font-semibold">Recent Maintenance Bills</CardTitle>
                 <CardDescription className="text-gray-500 mt-0.5">Your latest billing history</CardDescription>
               </div>
-              <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 font-medium rounded-lg">
+              <Button variant="ghost" size="sm" className="text-primary hover:text-primary/90 hover:bg-primary/5 font-medium rounded-lg">
                 View All <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
             </div>
@@ -147,7 +147,7 @@ export default function TenantDashboard() {
               {data.recentPayments.map((bill) => (
                 <div key={bill.id} className="flex items-center justify-between p-4 rounded-xl border border-gray-50 bg-gray-50/50 hover:bg-gray-50 transition-all group cursor-pointer">
                   <div className="flex items-center gap-4">
-                    <div className="h-11 w-11 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-100 transition-colors">
+                    <div className="h-11 w-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
                       <FileText className="h-5 w-5" />
                     </div>
                     <div>
@@ -173,7 +173,7 @@ export default function TenantDashboard() {
         <Card className="shadow-sm border-gray-100 lg:col-span-3 bg-white">
           <CardHeader className="pb-4">
             <div className="flex items-center gap-2">
-              <Megaphone className="h-5 w-5 text-blue-600" />
+              <Megaphone className="h-5 w-5 text-primary" />
               <CardTitle className="text-lg font-semibold">Announcements</CardTitle>
             </div>
             <CardDescription className="text-gray-500">Latest from the community</CardDescription>
@@ -183,11 +183,11 @@ export default function TenantDashboard() {
               {data.announcements.map((notice) => (
                 <div key={notice.id} className="flex gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer group">
                   <div className="mt-1.5 shrink-0">
-                    <div className={`w-2.5 h-2.5 rounded-full ${notice.tag === "Alert" ? "bg-red-500" : notice.tag === "Event" ? "bg-emerald-500" : "bg-blue-500"}`} />
+                    <div className={`w-2.5 h-2.5 rounded-full ${notice.tag === "Alert" ? "bg-red-500" : notice.tag === "Event" ? "bg-emerald-500" : "bg-primary"}`} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
-                      <p className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors truncate">{notice.title}</p>
+                      <p className="text-sm font-semibold text-gray-900 group-hover:text-primary transition-colors truncate">{notice.title}</p>
                       <Badge variant="outline" className={`text-[10px] shrink-0 font-medium border ${getTagColor(notice.tag)} rounded-md`}>{notice.tag}</Badge>
                     </div>
                     <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">

@@ -15,7 +15,7 @@ export default function TenantProfilePage() {
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">My Profile</h1>
           <p className="text-sm text-gray-500">View and manage your personal information.</p>
         </div>
-        <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium">
+        <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium">
           <Edit2 className="w-4 h-4 mr-2" /> Edit Profile
         </Button>
       </div>
@@ -24,12 +24,12 @@ export default function TenantProfilePage() {
         {/* Profile Card Sidebar */}
         <Card className="col-span-1 shadow-sm border-gray-100 h-fit bg-white overflow-hidden">
           {/* Cover gradient */}
-          <div className="h-24 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-700 relative">
+          <div className="h-24 bg-gradient-to-br from-primary via-[#D4894A] to-[#C4581E] relative">
             <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
               <div className="relative group cursor-pointer">
                 <Avatar className="w-24 h-24 border-4 border-white shadow-xl">
                   <AvatarImage src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-                  <AvatarFallback className="text-2xl bg-blue-100 text-blue-700 font-bold">JD</AvatarFallback>
+                  <AvatarFallback className="text-2xl bg-primary/20 text-[#D4894A] font-bold">JD</AvatarFallback>
                 </Avatar>
                 <div className="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                   <UploadCloud className="text-white w-6 h-6" />
@@ -51,8 +51,8 @@ export default function TenantProfilePage() {
 
             <div className="w-full text-left space-y-4 px-2">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-50 rounded-lg">
-                  <Building2 className="h-4 w-4 text-blue-600" />
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <Building2 className="h-4 w-4 text-primary" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 font-medium">Block & Flat</p>
@@ -60,8 +60,8 @@ export default function TenantProfilePage() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-50 rounded-lg">
-                  <CalendarDays className="h-4 w-4 text-blue-600" />
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <CalendarDays className="h-4 w-4 text-primary" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 font-medium">Lease Valid Until</p>
@@ -69,8 +69,8 @@ export default function TenantProfilePage() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-50 rounded-lg">
-                  <CreditCard className="h-4 w-4 text-blue-600" />
+                <div className="p-2 bg-primary/10 rounded-lg">
+                  <CreditCard className="h-4 w-4 text-primary" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 font-medium">Monthly Rent</p>

@@ -24,7 +24,7 @@ const assets = [
 
 const categoryIcon: Record<string, { icon: React.ComponentType<{ className?: string }>, color: string, bg: string }> = {
   Safety: { icon: Shield, color: "text-red-500", bg: "bg-red-50" },
-  Security: { icon: Shield, color: "text-blue-600", bg: "bg-blue-50" },
+  Security: { icon: Shield, color: "text-primary", bg: "bg-primary/10" },
   Infrastructure: { icon: Package, color: "text-violet-600", bg: "bg-violet-50" },
   Plumbing: { icon: Droplets, color: "text-cyan-600", bg: "bg-cyan-50" },
   Electrical: { icon: Zap, color: "text-amber-600", bg: "bg-amber-50" },
@@ -40,7 +40,7 @@ export default function AssetsPage() {
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">Asset & Inventory</h1>
           <p className="text-sm text-gray-500">Track and manage society assets, equipment, and inventory.</p>
         </div>
-        <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium">
+        <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium">
           <Plus className="w-4 h-4 mr-2" /> Add Asset
         </Button>
       </div>
@@ -48,7 +48,7 @@ export default function AssetsPage() {
       {/* Stats */}
       <div className="grid gap-4 md:grid-cols-4">
         {[
-          { title: "Total Assets", value: assets.length.toString(), icon: Package, bg: "bg-blue-50", color: "text-blue-600", border: "border-blue-100" },
+          { title: "Total Assets", value: assets.length.toString(), icon: Package, bg: "bg-primary/10", color: "text-primary", border: "border-primary/20" },
           { title: "Good Condition", value: assets.filter(a => a.condition === "Good").length.toString(), icon: CheckCircle2, bg: "bg-emerald-50", color: "text-emerald-600", border: "border-emerald-100" },
           { title: "Needs Attention", value: assets.filter(a => a.condition !== "Good").length.toString(), icon: AlertCircle, bg: "bg-amber-50", color: "text-amber-600", border: "border-amber-100" },
           { title: "Categories", value: new Set(assets.map(a => a.category)).size.toString(), icon: BarChart3, bg: "bg-violet-50", color: "text-violet-600", border: "border-violet-100" },

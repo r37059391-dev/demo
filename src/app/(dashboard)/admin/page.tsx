@@ -63,18 +63,18 @@ export default function AdminDashboard() {
                 </div>
                 <div className="flex gap-4">
                   <label className="flex items-center gap-2 text-sm font-medium text-gray-700 cursor-pointer">
-                    <input type="checkbox" defaultChecked className="rounded accent-blue-600" /> Email
+                    <input type="checkbox" defaultChecked className="rounded accent-primary" /> Email
                   </label>
                   <label className="flex items-center gap-2 text-sm font-medium text-gray-700 cursor-pointer">
-                    <input type="checkbox" defaultChecked className="rounded accent-blue-600" /> SMS
+                    <input type="checkbox" defaultChecked className="rounded accent-primary" /> SMS
                   </label>
                   <label className="flex items-center gap-2 text-sm font-medium text-gray-700 cursor-pointer">
-                    <input type="checkbox" className="rounded accent-blue-600" /> WhatsApp
+                    <input type="checkbox" className="rounded accent-primary" /> WhatsApp
                   </label>
                 </div>
               </div>
               <DialogFooter>
-                <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white w-full rounded-xl font-medium">
+                <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white w-full rounded-xl font-medium shadow-lg shadow-primary/20">
                   <Send className="w-4 h-4 mr-2" /> Send Notification
                 </Button>
               </DialogFooter>
@@ -90,7 +90,7 @@ export default function AdminDashboard() {
       {/* Admin Stats */}
       <div className="grid gap-4 md:grid-cols-4">
         {[
-          { title: "Total Tenants", value: "142", icon: Users, color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
+          { title: "Total Tenants", value: "142", icon: Users, color: "text-primary", bg: "bg-primary/10", border: "border-primary/20" },
           { title: "Active Leases", value: "138", icon: UserCheck, color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-100" },
           { title: "Pending Approvals", value: "4", icon: Clock, color: "text-amber-600", bg: "bg-amber-50", border: "border-amber-100" },
           { title: "Notice Period", value: "6", icon: UserX, color: "text-gray-600", bg: "bg-gray-50", border: "border-gray-200" },
@@ -154,7 +154,7 @@ export default function AdminDashboard() {
                     <div className="flex items-center gap-3">
                       <Avatar className="h-9 w-9 border border-gray-100">
                         <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${tenant.name}`} />
-                        <AvatarFallback className="bg-blue-50 text-blue-700 font-semibold text-xs">{tenant.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
+                        <AvatarFallback className="bg-primary/10 text-primary font-semibold text-xs">{tenant.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>
                       </Avatar>
                       <span className="font-semibold text-gray-900 text-sm">{tenant.name}</span>
                     </div>
@@ -174,7 +174,7 @@ export default function AdminDashboard() {
                       className={`text-xs font-medium rounded-lg border ${
                         tenant.status === "Active" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
                         tenant.status === "Pending Approval" ? "bg-amber-50 text-amber-700 border-amber-200" :
-                        "bg-blue-50 text-blue-700 border-blue-200"
+                        "bg-primary/10 text-primary border-primary/20"
                       }`}
                     >
                       {tenant.status}

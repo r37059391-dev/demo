@@ -48,7 +48,7 @@ export default function ParkingPage() {
           <p className="text-sm text-gray-500">Manage parking slots, assignments, and visitor parking.</p>
         </div>
         <Dialog>
-          <DialogTrigger render={<Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium" />}>
+          <DialogTrigger render={<Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium" />}>
             <Plus className="w-4 h-4 mr-2" /> Assign Parking
           </DialogTrigger>
           <DialogContent>
@@ -98,7 +98,7 @@ export default function ParkingPage() {
               </div>
             </div>
             <DialogFooter>
-              <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium">Assign Slot</Button>
+              <Button className="w-full bg-gradient-to-r from-primary to-[#D4894A] text-white rounded-xl font-medium">Assign Slot</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -107,7 +107,7 @@ export default function ParkingPage() {
       {/* Stats */}
       <div className="grid gap-4 md:grid-cols-4">
         {[
-          { title: "Total Slots", value: stats.total, icon: Car, bg: "bg-blue-50", color: "text-blue-600", border: "border-blue-100" },
+          { title: "Total Slots", value: stats.total, icon: Car, bg: "bg-primary/10", color: "text-primary", border: "border-primary/20" },
           { title: "Occupied", value: stats.occupied, icon: XCircle, bg: "bg-red-50", color: "text-red-500", border: "border-red-100" },
           { title: "Available", value: stats.available, icon: CheckCircle2, bg: "bg-emerald-50", color: "text-emerald-600", border: "border-emerald-100" },
           { title: "EV Charging", value: stats.ev, icon: Zap, bg: "bg-amber-50", color: "text-amber-600", border: "border-amber-100" },
@@ -139,14 +139,14 @@ export default function ParkingPage() {
             <div className={`h-1 ${
               slot.status === "Available" ? "bg-emerald-500" :
               slot.status === "Charging" ? "bg-amber-500" :
-              slot.status === "Visitor" ? "bg-violet-500" : "bg-blue-500"
+              slot.status === "Visitor" ? "bg-violet-500" : "bg-primary/100"
             }`} />
             <CardContent className="p-5">
               <div className="flex items-start justify-between mb-3">
                 <div className={`px-2.5 py-1 rounded-lg text-xs font-bold ${
                   slot.status === "Available" ? "bg-emerald-50 text-emerald-700" :
                   slot.status === "Charging" ? "bg-amber-50 text-amber-700" :
-                  slot.status === "Visitor" ? "bg-violet-50 text-violet-700" : "bg-blue-50 text-blue-700"
+                  slot.status === "Visitor" ? "bg-violet-50 text-violet-700" : "bg-primary/10 text-[#D4894A]"
                 }`}>
                   {slot.id}
                 </div>

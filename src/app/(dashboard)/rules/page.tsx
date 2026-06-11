@@ -26,9 +26,9 @@ const ruleCategories = [
     id: "general",
     name: "General Society Rules",
     icon: Building,
-    color: "text-blue-600",
-    bg: "bg-blue-50",
-    border: "border-blue-100",
+    color: "text-primary",
+    bg: "bg-primary/10",
+    border: "border-primary/20",
     rules: [
       { id: 1, title: "Quiet Hours Policy", desc: "Maintain silence between 10:00 PM to 7:00 AM. No loud music, parties, or construction noise during these hours. Weekend extensions: until 11:00 PM on Fridays and Saturdays.", priority: "High", status: "Active", updated: "Jan 15, 2026" },
       { id: 2, title: "Common Area Usage", desc: "Common areas like lobby, corridors, and staircases must be kept clean. No personal items to be placed in common areas. Shoes must be kept inside shoe racks only.", priority: "Medium", status: "Active", updated: "Jan 15, 2026" },
@@ -159,7 +159,7 @@ export default function RulesPage() {
             <Download className="w-4 h-4 mr-2" /> Export PDF
           </Button>
           <Dialog>
-            <DialogTrigger render={<Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium" />}>
+            <DialogTrigger render={<Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium" />}>
               <Plus className="w-4 h-4 mr-2" /> Add Rule
             </DialogTrigger>
             <DialogContent className="sm:max-w-[520px]">
@@ -204,15 +204,15 @@ export default function RulesPage() {
                   <Label className="text-sm font-semibold text-gray-700">Description</Label>
                   <Textarea placeholder="Describe the rule in detail..." className="min-h-[120px] rounded-xl" />
                 </div>
-                <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl border border-blue-100">
+                <div className="flex items-center gap-3 p-3 bg-primary/10 rounded-xl border border-primary/20">
                   <Checkbox defaultChecked />
-                  <label className="text-xs text-blue-800 font-medium cursor-pointer">
+                  <label className="text-xs text-[#C4581E] font-medium cursor-pointer">
                     Notify all tenants about this new rule
                   </label>
                 </div>
               </div>
               <DialogFooter>
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium">
+                <Button className="w-full bg-gradient-to-r from-primary to-[#D4894A] text-white rounded-xl font-medium">
                   <Plus className="w-4 h-4 mr-2" /> Publish Rule
                 </Button>
               </DialogFooter>
@@ -224,7 +224,7 @@ export default function RulesPage() {
       {/* Stats */}
       <div className="grid gap-4 md:grid-cols-4">
         {[
-          { title: "Total Rules", value: totalRules.toString(), icon: ScrollText, bg: "bg-blue-50", color: "text-blue-600", border: "border-blue-100" },
+          { title: "Total Rules", value: totalRules.toString(), icon: ScrollText, bg: "bg-primary/10", color: "text-primary", border: "border-primary/20" },
           { title: "Categories", value: ruleCategories.length.toString(), icon: BookOpen, bg: "bg-violet-50", color: "text-violet-600", border: "border-violet-100" },
           { title: "Active Rules", value: totalRules.toString(), icon: CheckCircle2, bg: "bg-emerald-50", color: "text-emerald-600", border: "border-emerald-100" },
           { title: "FAQs", value: faqs.length.toString(), icon: HelpCircle, bg: "bg-amber-50", color: "text-amber-600", border: "border-amber-100" },
@@ -329,7 +329,7 @@ export default function RulesPage() {
                                 </div>
                               </div>
                               <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-                                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50">
+                                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-lg text-gray-400 hover:text-primary hover:bg-primary/10">
                                   <Edit2 className="h-3.5 w-3.5" />
                                 </Button>
                                 <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50">
@@ -375,7 +375,7 @@ export default function RulesPage() {
                   </div>
                 </div>
                 <DialogFooter>
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl font-medium">
+                  <Button className="w-full bg-gradient-to-r from-primary to-[#D4894A] text-white rounded-xl font-medium">
                     Add FAQ
                   </Button>
                 </DialogFooter>
@@ -392,9 +392,9 @@ export default function RulesPage() {
                     onClick={() => toggleFaq(i)}
                     className="w-full flex items-center gap-4 p-5 text-left hover:bg-gray-50/50 transition-colors"
                   >
-                    <div className={`w-1 h-8 rounded-full shrink-0 ${isOpen ? "bg-blue-500" : "bg-gray-200"} transition-colors`} />
+                    <div className={`w-1 h-8 rounded-full shrink-0 ${isOpen ? "bg-primary/100" : "bg-gray-200"} transition-colors`} />
                     <div className="flex-1">
-                      <h3 className={`text-sm font-semibold transition-colors ${isOpen ? "text-blue-700" : "text-gray-900"}`}>
+                      <h3 className={`text-sm font-semibold transition-colors ${isOpen ? "text-[#D4894A]" : "text-gray-900"}`}>
                         {faq.q}
                       </h3>
                     </div>
@@ -402,7 +402,7 @@ export default function RulesPage() {
                   </button>
                   {isOpen && (
                     <div className="px-5 pb-5 pt-0">
-                      <div className="ml-5 pl-4 border-l-2 border-blue-100">
+                      <div className="ml-5 pl-4 border-l-2 border-primary/20">
                         <p className="text-sm text-gray-600 leading-relaxed">{faq.a}</p>
                       </div>
                     </div>
@@ -420,16 +420,16 @@ export default function RulesPage() {
               <h2 className="text-lg font-semibold text-gray-900">Policy Announcements</h2>
               <p className="text-sm text-gray-500 mt-0.5">Updates and changes to society rules</p>
             </div>
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium">
+            <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium">
               <Megaphone className="w-4 h-4 mr-2" /> New Announcement
             </Button>
           </div>
 
           <div className="space-y-4">
             {[
-              { title: "Updated Quiet Hours for Festival Season", date: "Sep 01, 2026", tag: "Policy Update", tagColor: "bg-blue-50 text-blue-600 border-blue-100", body: "During the upcoming festival season (Sep 15 - Oct 15), quiet hours will be relaxed to 11:00 PM on all days. However, firecrackers are strictly prohibited within society premises. Green celebration guidelines are attached.", author: "Management Committee" },
+              { title: "Updated Quiet Hours for Festival Season", date: "Sep 01, 2026", tag: "Policy Update", tagColor: "bg-primary/10 text-primary border-primary/20", body: "During the upcoming festival season (Sep 15 - Oct 15), quiet hours will be relaxed to 11:00 PM on all days. However, firecrackers are strictly prohibited within society premises. Green celebration guidelines are attached.", author: "Management Committee" },
               { title: "New EV Charging Stations Installed", date: "Aug 25, 2026", tag: "Facility", tagColor: "bg-emerald-50 text-emerald-600 border-emerald-100", body: "4 new EV charging stations have been installed in Basement 2. Charging is available 24/7 at ₹12/unit. Please use the SmartApt app to book a charging slot. Each session is limited to 4 hours.", author: "Infrastructure Team" },
-              { title: "Revised Parking Allocation Policy", date: "Aug 10, 2026", tag: "Policy Update", tagColor: "bg-blue-50 text-blue-600 border-blue-100", body: "Starting September 1, parking allocation will be revised. Each 2 BHK unit gets 1 covered + 1 open spot. Additional parking requests will be processed on a first-come-first-served basis at ₹1,500/month.", author: "Management Committee" },
+              { title: "Revised Parking Allocation Policy", date: "Aug 10, 2026", tag: "Policy Update", tagColor: "bg-primary/10 text-primary border-primary/20", body: "Starting September 1, parking allocation will be revised. Each 2 BHK unit gets 1 covered + 1 open spot. Additional parking requests will be processed on a first-come-first-served basis at ₹1,500/month.", author: "Management Committee" },
               { title: "Swimming Pool Maintenance Notice", date: "Jul 28, 2026", tag: "Maintenance", tagColor: "bg-amber-50 text-amber-600 border-amber-100", body: "The swimming pool will be closed from August 1-7 for annual deep cleaning and maintenance. We apologize for the inconvenience. The pool will reopen on August 8 with extended hours.", author: "Facility Manager" },
             ].map((ann, i) => (
               <Card key={i} className="shadow-sm border-gray-100 bg-white card-hover overflow-hidden">
@@ -447,8 +447,8 @@ export default function RulesPage() {
                       <h3 className="text-base font-semibold text-gray-900 mb-2">{ann.title}</h3>
                       <p className="text-sm text-gray-500 leading-relaxed">{ann.body}</p>
                       <div className="flex items-center gap-2 mt-4">
-                        <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
-                          <Users className="h-3 w-3 text-blue-600" />
+                        <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                          <Users className="h-3 w-3 text-primary" />
                         </div>
                         <span className="text-xs text-gray-500 font-medium">{ann.author}</span>
                       </div>

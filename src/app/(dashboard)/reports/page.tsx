@@ -50,7 +50,7 @@ export default function ReportsPage() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {[
           { title: "Total Revenue", value: "₹4,85,200", change: "+8.5%", up: true, icon: IndianRupee, bg: "bg-emerald-50", color: "text-emerald-600", border: "border-emerald-100" },
-          { title: "Occupancy Rate", value: "96.5%", change: "+1.2%", up: true, icon: Home, bg: "bg-blue-50", color: "text-blue-600", border: "border-blue-100" },
+          { title: "Occupancy Rate", value: "96.5%", change: "+1.2%", up: true, icon: Home, bg: "bg-primary/10", color: "text-primary", border: "border-primary/20" },
           { title: "Active Tenants", value: "142", change: "+3", up: true, icon: Users, bg: "bg-violet-50", color: "text-violet-600", border: "border-violet-100" },
           { title: "Pending Issues", value: "12", change: "-5", up: true, icon: MessageSquare, bg: "bg-amber-50", color: "text-amber-600", border: "border-amber-100" },
         ].map(stat => (
@@ -128,7 +128,7 @@ export default function ReportsPage() {
           <CardContent className="space-y-3">
             {[
               { name: "Financial Summary", desc: "Revenue, expenses & P/L", icon: IndianRupee, color: "text-emerald-600", bg: "bg-emerald-50" },
-              { name: "Occupancy Report", desc: "Unit status & vacancies", icon: Home, color: "text-blue-600", bg: "bg-blue-50" },
+              { name: "Occupancy Report", desc: "Unit status & vacancies", icon: Home, color: "text-primary", bg: "bg-primary/10" },
               { name: "Tenant Directory", desc: "Complete tenant listing", icon: Users, color: "text-violet-600", bg: "bg-violet-50" },
               { name: "Maintenance Log", desc: "All service requests", icon: MessageSquare, color: "text-amber-600", bg: "bg-amber-50" },
               { name: "Payment Collection", desc: "Dues & collection status", icon: CreditCard, color: "text-red-500", bg: "bg-red-50" },
@@ -140,11 +140,11 @@ export default function ReportsPage() {
                     <r.icon className={`h-4 w-4 ${r.color}`} />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">{r.name}</p>
+                    <p className="text-sm font-semibold text-gray-900 group-hover:text-[#D4894A] transition-colors">{r.name}</p>
                     <p className="text-[10px] text-gray-400">{r.desc}</p>
                   </div>
                 </div>
-                <Button variant="ghost" size="sm" className="rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 h-8 px-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <Button variant="ghost" size="sm" className="rounded-lg text-gray-400 hover:text-primary hover:bg-primary/10 h-8 px-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <Download className="h-3.5 w-3.5" />
                 </Button>
               </div>

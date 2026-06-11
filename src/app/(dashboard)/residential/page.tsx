@@ -40,7 +40,7 @@ export default function ResidentialPage() {
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">Residential Units</h1>
           <p className="text-sm text-gray-500">View and manage all apartment units across blocks.</p>
         </div>
-        <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium">
+        <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium">
           <Home className="w-4 h-4 mr-2" /> Add Unit
         </Button>
       </div>
@@ -48,7 +48,7 @@ export default function ResidentialPage() {
       {/* Stats */}
       <div className="grid gap-4 md:grid-cols-4">
         {[
-          { title: "Total Units", value: stats.total, icon: Building, bg: "bg-blue-50", color: "text-blue-600", border: "border-blue-100" },
+          { title: "Total Units", value: stats.total, icon: Building, bg: "bg-primary/10", color: "text-primary", border: "border-primary/20" },
           { title: "Occupied", value: stats.occupied, icon: Users, bg: "bg-emerald-50", color: "text-emerald-600", border: "border-emerald-100" },
           { title: "Available", value: stats.available, icon: CheckCircle2, bg: "bg-violet-50", color: "text-violet-600", border: "border-violet-100" },
           { title: "Notice / Maintenance", value: stats.notice, icon: Clock, bg: "bg-amber-50", color: "text-amber-600", border: "border-amber-100" },
@@ -106,15 +106,15 @@ export default function ResidentialPage() {
             unit.status === "Under Maintenance" ? "opacity-70" : ""
           }`}>
             <div className={`h-1 ${
-              unit.status === "Occupied" ? "bg-blue-500" :
+              unit.status === "Occupied" ? "bg-primary/100" :
               unit.status === "Available" ? "bg-emerald-500" :
               unit.status === "Notice Period" ? "bg-amber-500" : "bg-gray-400"
             }`} />
             <CardContent className="p-5">
               <div className="flex items-start justify-between mb-3">
-                <div className="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-bold">{unit.id}</div>
+                <div className="px-2.5 py-1 rounded-lg bg-primary/10 text-[#D4894A] text-xs font-bold">{unit.id}</div>
                 <Badge variant="outline" className={`text-[10px] font-medium rounded-md border ${
-                  unit.status === "Occupied" ? "bg-blue-50 text-blue-700 border-blue-200" :
+                  unit.status === "Occupied" ? "bg-primary/10 text-[#D4894A] border-primary/30" :
                   unit.status === "Available" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
                   unit.status === "Notice Period" ? "bg-amber-50 text-amber-700 border-amber-200" :
                   "bg-gray-50 text-gray-500 border-gray-200"
@@ -138,7 +138,7 @@ export default function ResidentialPage() {
               </div>
 
               <div className="mt-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
-                <Button variant="ghost" size="sm" className="text-blue-600 hover:bg-blue-50 rounded-lg text-xs font-medium h-7 px-2">
+                <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10 rounded-lg text-xs font-medium h-7 px-2">
                   View Details <ChevronRight className="h-3 w-3 ml-1" />
                 </Button>
               </div>

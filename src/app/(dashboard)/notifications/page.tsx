@@ -22,7 +22,7 @@ const notifications = [
 
 const typeConfig: Record<string, { icon: React.ComponentType<{ className?: string }>, color: string, bg: string }> = {
   alert: { icon: AlertCircle, color: "text-red-500", bg: "bg-red-50" },
-  payment: { icon: CreditCard, color: "text-blue-600", bg: "bg-blue-50" },
+  payment: { icon: CreditCard, color: "text-primary", bg: "bg-primary/10" },
   announcement: { icon: Megaphone, color: "text-violet-600", bg: "bg-violet-50" },
   maintenance: { icon: Wrench, color: "text-amber-600", bg: "bg-amber-50" },
   info: { icon: Info, color: "text-gray-500", bg: "bg-gray-50" },
@@ -38,7 +38,7 @@ export default function NotificationsPage() {
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">Notifications</h1>
           <p className="text-sm text-gray-500">
-            You have <span className="font-semibold text-blue-600">{unread} unread</span> notifications
+            You have <span className="font-semibold text-primary">{unread} unread</span> notifications
           </p>
         </div>
         <div className="flex gap-2">
@@ -50,9 +50,9 @@ export default function NotificationsPage() {
 
       {/* Notification Stats */}
       <div className="grid grid-cols-3 gap-4">
-        <Card className="shadow-sm border-blue-100 bg-white">
+        <Card className="shadow-sm border-primary/20 bg-white">
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-blue-600">{unread}</p>
+            <p className="text-2xl font-bold text-primary">{unread}</p>
             <p className="text-xs text-gray-500 font-medium mt-1">Unread</p>
           </CardContent>
         </Card>
@@ -76,10 +76,10 @@ export default function NotificationsPage() {
           const config = typeConfig[n.type]
           const Icon = config.icon
           return (
-            <Card key={n.id} className={`shadow-sm bg-white overflow-hidden group transition-all ${!n.read ? "border-blue-200 bg-blue-50/20" : "border-gray-100"}`}>
+            <Card key={n.id} className={`shadow-sm bg-white overflow-hidden group transition-all ${!n.read ? "border-primary/30 bg-primary/10/20" : "border-gray-100"}`}>
               <CardContent className="p-0">
                 <div className="flex">
-                  {!n.read && <div className="w-1 shrink-0 bg-blue-500" />}
+                  {!n.read && <div className="w-1 shrink-0 bg-primary/100" />}
                   <div className="flex-1 p-5 flex items-start gap-4">
                     <div className={`p-2.5 rounded-xl shrink-0 ${config.bg}`}>
                       <Icon className={`h-5 w-5 ${config.color}`} />
@@ -93,7 +93,7 @@ export default function NotificationsPage() {
                           </span>
                           <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                             {!n.read && (
-                              <button className="p-1 rounded-lg hover:bg-blue-50 text-gray-400 hover:text-blue-600 transition-colors">
+                              <button className="p-1 rounded-lg hover:bg-primary/10 text-gray-400 hover:text-primary transition-colors">
                                 <MailOpen className="h-3.5 w-3.5" />
                               </button>
                             )}

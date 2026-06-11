@@ -125,12 +125,12 @@ export default function DashboardLayout({
               onClick={() => toggleExpand(item.name)}
               className={`w-full group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
                 active
-                  ? "bg-gradient-to-r from-blue-50 to-blue-50/50 text-blue-700 shadow-sm shadow-blue-100"
+                  ? "bg-gradient-to-r from-primary/10 to-primary/5 text-primary shadow-sm shadow-primary/20"
                   : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
               }`}
             >
-              <div className={`p-1.5 rounded-lg ${active ? "bg-blue-100" : "bg-gray-100 group-hover:bg-gray-200"} transition-colors`}>
-                <item.icon className={`h-4 w-4 ${active ? "text-blue-600" : "text-gray-500 group-hover:text-gray-700"}`} />
+              <div className={`p-1.5 rounded-lg ${active ? "bg-primary/20" : "bg-gray-100 group-hover:bg-gray-200"} transition-colors`}>
+                <item.icon className={`h-4 w-4 ${active ? "text-primary" : "text-gray-500 group-hover:text-gray-700"}`} />
               </div>
               {item.name}
               {item.badge && (
@@ -148,7 +148,7 @@ export default function DashboardLayout({
                       href={child.href}
                       className={`block text-xs font-medium py-1.5 px-2 rounded-lg transition-colors ${
                         pathname === child.href
-                          ? "text-blue-700 bg-blue-50"
+                          ? "text-primary bg-primary/10"
                           : "text-gray-500 hover:text-gray-800 hover:bg-gray-50"
                       }`}
                     >
@@ -164,12 +164,12 @@ export default function DashboardLayout({
             href={item.href}
             className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
               active
-                ? "bg-gradient-to-r from-blue-50 to-blue-50/50 text-blue-700 shadow-sm shadow-blue-100"
+                ? "bg-gradient-to-r from-primary/10 to-primary/5 text-primary shadow-sm shadow-primary/20"
                 : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
             }`}
           >
-            <div className={`p-1.5 rounded-lg ${active ? "bg-blue-100" : "bg-gray-100 group-hover:bg-gray-200"} transition-colors`}>
-              <item.icon className={`h-4 w-4 ${active ? "text-blue-600" : "text-gray-500 group-hover:text-gray-700"}`} />
+            <div className={`p-1.5 rounded-lg ${active ? "bg-primary/20" : "bg-gray-100 group-hover:bg-gray-200"} transition-colors`}>
+              <item.icon className={`h-4 w-4 ${active ? "text-primary" : "text-gray-500 group-hover:text-gray-700"}`} />
             </div>
             {item.name}
             {item.badge && (
@@ -177,7 +177,7 @@ export default function DashboardLayout({
                 {item.badge}
               </span>
             )}
-            {active && !item.badge && <ChevronRight className="ml-auto h-4 w-4 text-blue-400" />}
+            {active && !item.badge && <ChevronRight className="ml-auto h-4 w-4 text-primary/60" />}
           </Link>
         )}
       </li>
@@ -199,7 +199,7 @@ export default function DashboardLayout({
         {/* Logo */}
         <div className="flex h-[72px] shrink-0 items-center px-6 border-b border-gray-50">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shadow-lg shadow-blue-600/25 group-hover:shadow-blue-600/40 transition-shadow">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-[#D4894A] flex items-center justify-center shadow-lg shadow-primary/25 group-hover:shadow-primary/40 transition-shadow">
               <Building2 className="text-white w-5 h-5" />
             </div>
             <span className="text-xl font-bold text-gray-900 tracking-tight">Smart<span className="text-gradient">Apt</span></span>
@@ -297,9 +297,9 @@ export default function DashboardLayout({
               <p className="text-xs text-gray-500">{userUnit || (role === 'admin' ? 'Management Office' : '')}</p>
             </div>
             <div className="relative">
-              <Avatar className="border-2 border-blue-100 ring-2 ring-blue-50">
+              <Avatar className="border-2 border-primary/20 ring-2 ring-primary/5">
                 <AvatarImage src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-                <AvatarFallback className="bg-blue-100 text-blue-700 font-semibold">JD</AvatarFallback>
+                <AvatarFallback className="bg-primary/20 text-primary font-semibold">JD</AvatarFallback>
               </Avatar>
               <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 border-2 border-white rounded-full" />
             </div>

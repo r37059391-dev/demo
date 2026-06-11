@@ -24,7 +24,7 @@ export default function DocumentsPage() {
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">Document Center</h1>
           <p className="text-sm text-gray-500">Manage and upload your important documents for KYC verification.</p>
         </div>
-        <Button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-600/20 rounded-xl font-medium">
+        <Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium">
           <UploadCloud className="w-4 h-4 mr-2" /> Upload New
         </Button>
       </div>
@@ -32,7 +32,7 @@ export default function DocumentsPage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4">
         {[
-          { label: "Total Uploaded", value: "4", color: "text-blue-600" },
+          { label: "Total Uploaded", value: "4", color: "text-primary" },
           { label: "Verified", value: "2", color: "text-emerald-600" },
           { label: "Pending Action", value: "2", color: "text-amber-600" },
         ].map((s) => (
@@ -56,7 +56,7 @@ export default function DocumentsPage() {
                 <div className={`h-1 ${doc.status === "Verified" ? "bg-emerald-500" : doc.status === "Pending" ? "bg-amber-500" : "bg-red-500"}`} />
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-4">
-                    <div className="p-3 bg-gradient-to-br from-blue-50 to-blue-100 text-blue-600 rounded-xl group-hover:from-blue-100 group-hover:to-blue-200 transition-colors">
+                    <div className="p-3 bg-gradient-to-br from-primary/10 to-blue-100 text-primary rounded-xl group-hover:from-blue-100 group-hover:to-blue-200 transition-colors">
                       <FileText className="w-6 h-6" />
                     </div>
                     <Badge variant="outline" className={`text-xs font-medium border rounded-lg ${config.color}`}>
@@ -73,7 +73,7 @@ export default function DocumentsPage() {
                       <Eye className="w-3 h-3 mr-1.5" /> View
                     </Button>
                     {doc.status === "Re-upload" ? (
-                      <Button size="sm" className="flex-1 text-xs bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-medium">
+                      <Button size="sm" className="flex-1 text-xs bg-gradient-to-r from-primary to-[#D4894A] text-white rounded-lg font-medium">
                         <UploadCloud className="w-3 h-3 mr-1.5" /> Replace
                       </Button>
                     ) : (
@@ -89,13 +89,13 @@ export default function DocumentsPage() {
         })}
 
         {/* Upload New Card */}
-        <Card className="shadow-sm border-2 border-dashed border-gray-200 hover:border-blue-300 bg-gray-50/30 hover:bg-blue-50/20 transition-all cursor-pointer flex flex-col items-center justify-center min-h-[260px] group rounded-2xl">
-          <div className="p-4 bg-white shadow-sm text-gray-400 group-hover:text-blue-500 rounded-2xl mb-3 group-hover:shadow-md transition-all">
+        <Card className="shadow-sm border-2 border-dashed border-gray-200 hover:border-blue-300 bg-gray-50/30 hover:bg-primary/10/20 transition-all cursor-pointer flex flex-col items-center justify-center min-h-[260px] group rounded-2xl">
+          <div className="p-4 bg-white shadow-sm text-gray-400 group-hover:text-primary rounded-2xl mb-3 group-hover:shadow-md transition-all">
             <UploadCloud className="w-8 h-8" />
           </div>
           <h3 className="font-semibold text-gray-700 group-hover:text-gray-900">Upload Document</h3>
           <p className="text-xs text-gray-400 mt-1">PDF, JPG, PNG up to 5MB</p>
-          <p className="text-xs text-blue-600 font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">Click to browse</p>
+          <p className="text-xs text-primary font-medium mt-3 opacity-0 group-hover:opacity-100 transition-opacity">Click to browse</p>
         </Card>
       </div>
     </div>

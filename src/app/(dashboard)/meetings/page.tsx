@@ -52,7 +52,7 @@ export default function MeetingsPage() {
     switch (type) {
       case "AGM": return "bg-purple-100 text-purple-700 border-purple-200"
       case "Emergency": return "bg-red-100 text-red-700 border-red-200"
-      case "Committee": return "bg-blue-100 text-blue-700 border-blue-200"
+      case "Committee": return "bg-primary/20 text-[#D4894A] border-primary/30"
       default: return "bg-gray-100 text-gray-700 border-gray-200"
     }
   }
@@ -63,8 +63,8 @@ export default function MeetingsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-            <CalendarDays className="w-6 h-6 text-blue-600" />
+          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+            <CalendarDays className="w-6 h-6 text-primary" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Association Meetings</h1>
@@ -76,7 +76,7 @@ export default function MeetingsPage() {
 
         {isAdmin && (
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger render={<Button className="bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-600/20" />}>
+            <DialogTrigger render={<Button className="bg-primary hover:bg-[#D4894A] text-white shadow-md shadow-primary/20" />}>
               <Plus className="w-4 h-4 mr-2" />
               Schedule Meeting
             </DialogTrigger>
@@ -113,7 +113,7 @@ export default function MeetingsPage() {
               </div>
               <DialogFooter>
                 <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
-                <Button onClick={() => setIsDialogOpen(false)} className="bg-blue-600 text-white">Schedule Meeting</Button>
+                <Button onClick={() => setIsDialogOpen(false)} className="bg-primary text-white">Schedule Meeting</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
@@ -168,7 +168,7 @@ export default function MeetingsPage() {
               {isAdmin ? (
                 <div className="flex items-center justify-between w-full">
                   <div className="flex items-center text-sm text-gray-500 font-medium">
-                    <Users className="w-4 h-4 mr-2 text-blue-600" />
+                    <Users className="w-4 h-4 mr-2 text-primary" />
                     {meeting.rsvpCount} RSVPs
                   </div>
                   {meeting.status === "upcoming" && (
@@ -188,7 +188,7 @@ export default function MeetingsPage() {
                     <div className="flex gap-3 w-full">
                       <Button 
                         onClick={() => handleRSVP(meeting.id, "attending")}
-                        className="flex-1 bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-sm"
+                        className="flex-1 bg-white text-primary border border-primary/30 hover:bg-primary/10 hover:border-blue-300 shadow-sm"
                       >
                         Yes, I'll attend
                       </Button>
