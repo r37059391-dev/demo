@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { useState, useEffect } from "react"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
@@ -9,28 +9,91 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import {
-  Car, Search, Plus, MapPin, Clock, CheckCircle2, AlertCircle,
-  XCircle, ChevronRight, Calendar, Users, Zap
+  Car, Search, Plus, CheckCircle2,
+  XCircle, Zap, Loader2
 } from "lucide-react"
-
-const parkingSlots = [
-  { id: "P-A01", block: "A", type: "Covered", floor: "B1", tenant: "John Doe", flat: "A-402", vehicle: "MH02-AB-1234", vehicleType: "Car", status: "Occupied" },
-  { id: "P-A02", block: "A", type: "Covered", floor: "B1", tenant: "Sarah Smith", flat: "B-201", vehicle: "KA01-CD-5678", vehicleType: "Car", status: "Occupied" },
-  { id: "P-A03", block: "A", type: "Open", floor: "Ground", tenant: "-", flat: "-", vehicle: "-", vehicleType: "-", status: "Available" },
-  { id: "P-B01", block: "B", type: "Covered", floor: "B1", tenant: "Michael Raj", flat: "C-105", vehicle: "TN09-EF-9012", vehicleType: "Bike", status: "Occupied" },
-  { id: "P-B02", block: "B", type: "Open", floor: "Ground", tenant: "-", flat: "-", vehicle: "-", vehicleType: "-", status: "Available" },
-  { id: "P-C01", block: "C", type: "Covered", floor: "B2", tenant: "Priya Sharma", flat: "A-501", vehicle: "DL03-GH-3456", vehicleType: "Car", status: "Occupied" },
-  { id: "P-EV1", block: "B", type: "EV Charging", floor: "B2", tenant: "David Chen", flat: "B-602", vehicle: "MH01-EV-7890", vehicleType: "EV Car", status: "Charging" },
-  { id: "P-V01", block: "A", type: "Visitor", floor: "Ground", tenant: "Visitor", flat: "-", vehicle: "MH04-XY-1111", vehicleType: "Car", status: "Visitor" },
-]
 
 export default function ParkingPage() {
   const [search, setSearch] = useState("")
+  const [parkingSlots, setParkingSlots] = useState<any[]>([])
+  const [tenants, setTenants] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [isAssigning, setIsAssigning] = useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+  // Assignment Form State
+  const [selectedTenant, setSelectedTenant] = useState("")
+  const [selectedSlot, setSelectedSlot] = useState("")
+  const [vehicleNumber, setVehicleNumber] = useState("")
+  const [vehicleType, setVehicleType] = useState("")
+
+  const fetchData = async () => {
+    try {
+      const [parkingRes, usersRes] = await Promise.all([
+        fetch("/api/parking"),
+        fetch("/api/users")
+      ])
+      
+      if (parkingRes.ok) {
+        const parkingData = await parkingRes.json()
+        setParkingSlots(parkingData.parkingSlots || [])
+      }
+      
+      if (usersRes.ok) {
+        const usersData = await usersRes.json()
+        setTenants(usersData.users || [])
+      }
+    } catch (error) {
+      console.error("Failed to fetch parking data:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const handleAssign = async () => {
+    if (!selectedTenant || !selectedSlot) return
+
+    setIsAssigning(true)
+    try {
+      const res = await fetch("/api/parking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          slotId: selectedSlot,
+          tenantId: selectedTenant,
+          vehicleNumber,
+          vehicleType
+        })
+      })
+
+      if (res.ok) {
+        setIsDialogOpen(false)
+        // Reset form
+        setSelectedTenant("")
+        setSelectedSlot("")
+        setVehicleNumber("")
+        setVehicleType("")
+        // Refresh data
+        await fetchData()
+      } else {
+        const data = await res.json()
+        alert(data.error || "Failed to assign parking")
+      }
+    } catch (error) {
+      console.error("Assignment failed:", error)
+    } finally {
+      setIsAssigning(false)
+    }
+  }
 
   const filtered = parkingSlots.filter(s =>
     s.id.toLowerCase().includes(search.toLowerCase()) ||
-    s.tenant.toLowerCase().includes(search.toLowerCase()) ||
-    s.vehicle.toLowerCase().includes(search.toLowerCase())
+    s.tenant?.toLowerCase().includes(search.toLowerCase()) ||
+    s.vehicle?.toLowerCase().includes(search.toLowerCase())
   )
 
   const stats = {
@@ -40,6 +103,12 @@ export default function ParkingPage() {
     ev: parkingSlots.filter(s => s.type === "EV Charging").length,
   }
 
+  if (isLoading) {
+    return <div className="flex h-[400px] items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>
+  }
+
+  const availableSlots = parkingSlots.filter(s => s.status === "Available")
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -47,7 +116,7 @@ export default function ParkingPage() {
           <h1 className="text-2xl font-bold tracking-tight text-gray-900">Parking Management</h1>
           <p className="text-sm text-gray-500">Manage parking slots, assignments, and visitor parking.</p>
         </div>
-        <Dialog>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger render={<Button className="bg-gradient-to-r from-primary to-[#D4894A] text-white shadow-lg shadow-primary/20 rounded-xl font-medium" />}>
             <Plus className="w-4 h-4 mr-2" /> Assign Parking
           </DialogTrigger>
@@ -60,21 +129,24 @@ export default function ParkingPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label className="text-sm font-semibold text-gray-700">Tenant</Label>
-                  <Select>
+                  <Select value={selectedTenant} onValueChange={setSelectedTenant}>
                     <SelectTrigger className="h-11 rounded-xl"><SelectValue placeholder="Select tenant" /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="t1">A-402 - John Doe</SelectItem>
-                      <SelectItem value="t2">B-201 - Sarah Smith</SelectItem>
+                      {tenants.map(t => (
+                        <SelectItem key={t.id} value={t.id}>{t.block}-{t.unit} • {t.name}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
                   <Label className="text-sm font-semibold text-gray-700">Slot</Label>
-                  <Select>
+                  <Select value={selectedSlot} onValueChange={setSelectedSlot}>
                     <SelectTrigger className="h-11 rounded-xl"><SelectValue placeholder="Available slots" /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="pa03">P-A03 (Open, Ground)</SelectItem>
-                      <SelectItem value="pb02">P-B02 (Open, Ground)</SelectItem>
+                      {availableSlots.length === 0 && <SelectItem value="none" disabled>No slots available</SelectItem>}
+                      {availableSlots.map(s => (
+                        <SelectItem key={s.id} value={s.id}>{s.id} ({s.type}, {s.floor})</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
@@ -82,23 +154,35 @@ export default function ParkingPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label className="text-sm font-semibold text-gray-700">Vehicle Number</Label>
-                  <Input placeholder="MH02-AB-1234" className="h-11 rounded-xl" />
+                  <Input 
+                    placeholder="MH02-AB-1234" 
+                    className="h-11 rounded-xl"
+                    value={vehicleNumber}
+                    onChange={(e) => setVehicleNumber(e.target.value.toUpperCase())}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label className="text-sm font-semibold text-gray-700">Vehicle Type</Label>
-                  <Select>
+                  <Select value={vehicleType} onValueChange={setVehicleType}>
                     <SelectTrigger className="h-11 rounded-xl"><SelectValue placeholder="Type" /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="car">Car</SelectItem>
-                      <SelectItem value="bike">Bike</SelectItem>
-                      <SelectItem value="ev">EV Car</SelectItem>
+                      <SelectItem value="Car">Car</SelectItem>
+                      <SelectItem value="Bike">Bike</SelectItem>
+                      <SelectItem value="EV Car">EV Car</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
             </div>
             <DialogFooter>
-              <Button className="w-full bg-gradient-to-r from-primary to-[#D4894A] text-white rounded-xl font-medium">Assign Slot</Button>
+              <Button 
+                onClick={handleAssign}
+                disabled={isAssigning || !selectedTenant || !selectedSlot}
+                className="w-full bg-gradient-to-r from-primary to-[#D4894A] text-white rounded-xl font-medium"
+              >
+                {isAssigning ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
+                Assign Slot
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -177,7 +261,15 @@ export default function ParkingPage() {
                   </>
                 )}
                 {slot.status === "Available" && (
-                  <Button variant="outline" size="sm" className="w-full mt-2 rounded-lg border-emerald-200 text-emerald-600 hover:bg-emerald-50 text-xs font-medium">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full mt-2 rounded-lg border-emerald-200 text-emerald-600 hover:bg-emerald-50 text-xs font-medium"
+                    onClick={() => {
+                      setSelectedSlot(slot.id)
+                      setIsDialogOpen(true)
+                    }}
+                  >
                     <Plus className="h-3 w-3 mr-1" /> Assign
                   </Button>
                 )}
@@ -185,6 +277,11 @@ export default function ParkingPage() {
             </CardContent>
           </Card>
         ))}
+        {filtered.length === 0 && (
+          <div className="col-span-full py-12 text-center text-gray-500">
+            No parking slots found matching your search.
+          </div>
+        )}
       </div>
     </div>
   )

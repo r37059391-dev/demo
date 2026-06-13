@@ -14,6 +14,7 @@ export default function AuthLayout({
           src="/luxury-apartment.png"
           alt="Modern luxury apartment"
           fill
+          sizes="(max-width: 1024px) 100vw, 55vw"
           className="object-cover"
           priority
         />

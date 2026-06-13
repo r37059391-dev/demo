@@ -19,6 +19,7 @@ type DashboardData = {
   }
   recentPayments: { id: string; month: string; amount: number; status: string; dueDate: string; paidDate?: string }[]
   announcements: { id: string; title: string; content: string; tag: string; createdAt: string }[]
+  parking: { id: string; block: string; floor: string; type: string; vehicleNumber: string } | null
 }
 
 export default function TenantDashboard() {
@@ -32,7 +33,10 @@ export default function TenantDashboard() {
     fetch("/api/dashboard", { signal: controller.signal })
       .then((res) => res.json())
       .then((d) => { setData(d); setLoading(false) })
-      .catch(() => setLoading(false))
+      .catch((err) => {
+        if (err.name === 'AbortError') return
+        setLoading(false)
+      })
       .finally(() => clearTimeout(timeoutId))
       
     return () => {
@@ -49,8 +53,15 @@ export default function TenantDashboard() {
     )
   }
 
-  if (!data) {
-    return <div className="text-center py-20 text-gray-500">Failed to load dashboard data.</div>
+  if (!data || (data as any).error) {
+    return (
+      <div className="text-center py-20 text-gray-500">
+        <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+        <h3 className="text-lg font-semibold text-gray-900">Failed to load dashboard data</h3>
+        <p className="mt-1 text-sm text-red-500">{(data as any)?.error || "Unknown server error occurred."}</p>
+        <Button onClick={() => window.location.reload()} variant="outline" className="mt-6">Try Again</Button>
+      </div>
+    )
   }
 
   const statCards = [
@@ -135,6 +146,56 @@ export default function TenantDashboard() {
             </CardContent>
           </Card>
         ))}
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* My Parking */}
+        <Card className="shadow-sm border-gray-100 bg-white col-span-1 md:col-span-3">
+          <CardHeader className="pb-4 border-b border-gray-50 bg-gray-50/30">
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-xl bg-indigo-50 text-indigo-600">
+                <Car className="h-5 w-5" />
+              </div>
+              <div>
+                <CardTitle className="text-lg font-semibold">My Parking Allocation</CardTitle>
+                <CardDescription className="text-gray-500 mt-0.5">Your assigned parking space</CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-6">
+            {data.parking ? (
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-xl border border-indigo-100 bg-indigo-50/50">
+                <div className="flex items-center gap-4">
+                  <div className="h-14 w-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-xl shadow-sm border border-indigo-200">
+                    {data.parking.id}
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 text-lg flex items-center gap-2">
+                      {data.parking.type} Parking
+                      <Badge variant="outline" className="bg-white text-indigo-700 border-indigo-200 text-xs px-2 py-0.5">
+                        Block {data.parking.block}
+                      </Badge>
+                    </h4>
+                    <p className="text-sm text-gray-500 mt-1 flex items-center gap-2">
+                      <span className="font-medium text-gray-700">Level:</span> {data.parking.floor} 
+                      <span className="text-gray-300">•</span>
+                      <span className="font-medium text-gray-700">Vehicle:</span> {data.parking.vehicleNumber || 'Unregistered'}
+                    </p>
+                  </div>
+                </div>
+                <Button variant="outline" className="shrink-0 w-full sm:w-auto bg-white border-gray-200 hover:bg-gray-50 hover:text-indigo-700">
+                  Update Vehicle
+                </Button>
+              </div>
+            ) : (
+              <div className="text-center py-6 px-4 rounded-xl border border-dashed border-gray-200 bg-gray-50/50">
+                <Car className="w-8 h-8 text-gray-300 mx-auto mb-3" />
+                <h4 className="text-sm font-semibold text-gray-900">No Parking Assigned</h4>
+                <p className="text-xs text-gray-500 mt-1 max-w-sm mx-auto">You do not have a registered parking slot yet. Please contact the society admin to get a parking slot assigned to you.</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-7">

@@ -1,7 +1,4 @@
-import { cookies } from "next/headers"
-import { db } from "./db"
-
-const SESSION_COOKIE = "smartapt_session"
+import { createClient } from "./supabase/server"
 
 export type Session = {
   userId: string
@@ -10,42 +7,28 @@ export type Session = {
   name: string
 }
 
-export async function createSession(userId: string): Promise<Session | null> {
-  const user = db.users.findById(userId)
-  if (!user) return null
-
-  const session: Session = {
-    userId: user.id,
-    email: user.email,
-    role: user.role,
-    name: user.name,
-  }
-
-  const cookieStore = await cookies()
-  cookieStore.set(SESSION_COOKIE, JSON.stringify(session), {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 7, // 7 days
-  })
-
-  return session
-}
-
 export async function getSession(): Promise<Session | null> {
-  const cookieStore = await cookies()
-  const raw = cookieStore.get(SESSION_COOKIE)
-  if (!raw?.value) return null
+  const supabase = await createClient()
+  const { data: { session }, error } = await supabase.auth.getSession()
+  
+  if (error || !session) return null
 
-  try {
-    return JSON.parse(raw.value) as Session
-  } catch {
-    return null
+  // fetch user role and name from public.users
+  const { data: user } = await supabase
+    .from('users')
+    .select('role, name')
+    .eq('id', session.user.id)
+    .single()
+
+  return {
+    userId: session.user.id,
+    email: session.user.email!,
+    role: user?.role || "tenant",
+    name: user?.name || session.user.email!.split('@')[0],
   }
 }
 
 export async function destroySession(): Promise<void> {
-  const cookieStore = await cookies()
-  cookieStore.delete(SESSION_COOKIE)
+  const supabase = await createClient()
+  await supabase.auth.signOut()
 }

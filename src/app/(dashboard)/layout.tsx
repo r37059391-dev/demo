@@ -102,7 +102,8 @@ export default function DashboardLayout({
           router.push("/login")
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        if (err.name === 'AbortError') return
         router.push("/login")
       })
       .finally(() => clearTimeout(timeoutId))

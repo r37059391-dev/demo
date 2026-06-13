@@ -1,27 +1,29 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getSession } from "@/lib/auth"
-import { db } from "@/lib/db"
+import { createClient } from "@/lib/supabase/server"
 
 export async function GET() {
   const session = await getSession()
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-  const meetings = db.meetings.getAll()
+  const supabase = await createClient()
+  const { data: meetings } = await supabase.from('meetings').select('*, meeting_rsvps(*)')
   
-  // Add tenant-specific RSVP status if tenant
   if (session.role === "tenant") {
-    const meetingsWithStatus = meetings.map((m) => ({
+    const meetingsWithStatus = (meetings || []).map((m: any) => ({
       ...m,
-      rsvpCount: m.rsvps.length,
-      tenantStatus: m.rsvps.find((r) => r.userId === session.userId)?.status || "pending",
+      createdBy: m.created_by,
+      rsvpCount: (m.meeting_rsvps || []).length,
+      tenantStatus: (m.meeting_rsvps || []).find((r: any) => r.user_id === session.userId)?.status || "pending",
     }))
     return NextResponse.json({ meetings: meetingsWithStatus })
   }
 
   // Admin gets full RSVP data
-  const meetingsWithCounts = meetings.map((m) => ({
+  const meetingsWithCounts = (meetings || []).map((m: any) => ({
     ...m,
-    rsvpCount: m.rsvps.filter((r) => r.status === "attending").length,
+    createdBy: m.created_by,
+    rsvpCount: (m.meeting_rsvps || []).filter((r: any) => r.status === "attending").length,
   }))
   return NextResponse.json({ meetings: meetingsWithCounts })
 }
@@ -33,11 +35,20 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json()
-  const meeting = db.meetings.create({
-    ...body,
+  const supabase = await createClient()
+  
+  const { data: meeting, error } = await supabase.from('meetings').insert({
+    title: body.title,
+    date: body.date,
+    time: body.time,
+    location: body.location,
+    description: body.description,
+    type: body.type,
     status: "upcoming",
-    createdBy: session.userId,
-    rsvps: [],
-  })
+    created_by: session.userId,
+  }).select().single()
+
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
   return NextResponse.json({ meeting }, { status: 201 })
 }
